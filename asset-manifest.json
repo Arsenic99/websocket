@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/websocket/static/css/main.8fdebdd3.css",
+    "main.js": "/websocket/static/js/main.29eaac22.js",
+    "static/media/PPNeueMachina-PlainRegular.otf": "/websocket/static/media/PPNeueMachina-PlainRegular.c1fe9e8fedaaf2eed971.otf",
+    "index.html": "/websocket/index.html",
+    "main.8fdebdd3.css.map": "/websocket/static/css/main.8fdebdd3.css.map",
+    "main.29eaac22.js.map": "/websocket/static/js/main.29eaac22.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8fdebdd3.css",
+    "static/js/main.29eaac22.js"
+  ]
+}
