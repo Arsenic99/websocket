@@ -6,14 +6,13 @@ import { Table, TableBody, TableCell, TableRow } from "./table"
 import { useGetCoinByNameQuery } from "../store/queries/api"
 import { useAppDispatch, useAppSelector } from "../hooks/slice"
 import { setCoin, updateCoin } from "../store/slices/coinSlice"
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 export const Header = () => {
 
-    const notify = () => toast.error('Пожалуйста укажите количество!',{
+    const notify = () => toast.error('Пожалуйста укажите количество!',{ // Уведомление об ошибке, если кол-во 0.
         closeButton: false,
         autoClose: 1000,
-
     });
 
     const coins = useAppSelector(state => state.coin.cryptoCoins);
@@ -21,15 +20,15 @@ export const Header = () => {
 
     const [loading, setLoading] = useState(true);
 
-    const { data } = useGetCoinByNameQuery({});
+    const { data } = useGetCoinByNameQuery({}); // Через RTK query загружаю все валюты
     
-    useEffect(() => {
+    useEffect(() => { // После того как данные подгрузятся записываю в стейт
         if (data !== undefined) {
             dispatch(setCoin(data))
         }
     }, [data, dispatch])
 
-    useEffect(() => {
+    useEffect(() => { // Подключение к websocket и запись в стейт
         const connect = new WebSocket("wss://stream.binance.com:9443/ws/!ticker@arr")
 
         connect.onopen = () => {
@@ -58,7 +57,7 @@ export const Header = () => {
 
     const defaultSymbols = ["BTCUSDT", "ETHUSDT", "BNBUSDT", "BCCUSDT", "NEOUSDT"];
 
-    const filteredCoins = search
+    const filteredCoins = search // поиск по имени
         ? coins
             .filter((el: any) =>
                 el.s.toLowerCase().includes(search.toLowerCase())
@@ -73,17 +72,17 @@ export const Header = () => {
     const [open, setOpen] = useState(false)
     const [input, setInput] = useState<number | null>(null);
 
-    const handleClick = (item: any) => {
+    const handleClick = (item: any) => { // принажатии записывается валюта и открывается input для введения кол-ва
         setCrypt(item)
     }
-    useEffect(() => {
+    useEffect(() => { // обнуляет стейты при открытии/закрытии диалогового окна
         if (!open) {
             setSearch('');
             setCrypt(null);
             setInput(null);
         }
     }, [open]);
-    const onSubmit = () => {
+    const onSubmit = () => { // сохранение валюты в локальном хранилище
         if (!input) { notify(); return;}
 
         const existing = JSON.parse(localStorage.getItem("coins") || "[]");
@@ -101,7 +100,7 @@ export const Header = () => {
         onCancel()
     }
 
-    const onCancel = () => {
+    const onCancel = () => { // Отклик на нажатие кнопки отмена
         setOpen(false)
     }
     return (

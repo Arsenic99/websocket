@@ -9,7 +9,7 @@ export const coinSlice = createSlice({
     name: 'coin',
     initialState,
     reducers: {
-        setCoin: (state, action) => {
+        setCoin: (state, action) => { // запись всех валют
             state.cryptoCoins = action.payload.map((item: any) => {
                 if(item.symbol === undefined) console.log("item", item)
                 return {
@@ -32,7 +32,7 @@ export const coinSlice = createSlice({
             });
         },
 
-        updateCoin: (state, action) => {
+        updateCoin: (state, action) => { //обновление данных валют
             state.cryptoCoins = state.cryptoCoins.map((item: any) => {
                 const updatedCoin = action.payload.find((updated: any) => updated.s === item.s);
                 return updatedCoin ? { ...item, ...updatedCoin } : item;

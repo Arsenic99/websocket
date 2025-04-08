@@ -5,7 +5,7 @@ export const CoinTable = () => {
     const [coins, setCoins] = useState<any[]>([]);
     const [sum, setSum] = useState(10)
 
-    const loadCoins = () => {
+    const loadCoins = () => { // загружает валюты из локального хранилища
         const stored = localStorage.getItem("coins");
         if (stored) {
             setCoins(JSON.parse(stored));
@@ -18,14 +18,14 @@ export const CoinTable = () => {
         loadCoins();
 
         const handleStorageChange = () => loadCoins();
-        window.addEventListener("coinsUpdated", handleStorageChange);
+        window.addEventListener("coinsUpdated", handleStorageChange); // при добавлении валюты в диалоговогом окне, перерисовывает таблицу
 
         return () => {
             window.removeEventListener("coinsUpdated", handleStorageChange);
         };
     }, []);
 
-    const handleClick = (item: any) => {
+    const handleClick = (item: any) => { //удаление валюты из локального хранилища
         const updatedCoins = coins.filter((el) => el.symbol !== item.symbol);
         localStorage.setItem("coins", JSON.stringify(updatedCoins));
         setCoins(updatedCoins);
