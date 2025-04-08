@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: PP Neue Machina, sans-serif;
+}
+
+@font-face {
+  font-family: PP Neue Machina;
+  src: url(./styles/fonts/PPNeueMachina-PlainRegular.otf);
+}
